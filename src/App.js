@@ -1,9 +1,10 @@
 import React from 'react'
+import Calendar from './Components/Calendar'
 
 function App() {
   return (
     <div>
-      <h1>Date Picker</h1>
+      <Calendar />
     </div>
   )
 }
