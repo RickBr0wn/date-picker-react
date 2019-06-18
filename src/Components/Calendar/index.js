@@ -40,6 +40,20 @@ export default class Calendar extends React.Component {
     this.setState({ dateContext: dateContext })
   }
 
+  nextMonth = () => {
+    let dateContext = Object.assign({}, this.state.dateContext)
+    dateContext = moment(dateContext).add(1, 'month')
+    this.setState({ dateContext })
+    this.props.onNextMonth && this.props.onNextMonth()
+  }
+
+  previousMonth = () => {
+    let dateContext = Object.assign({}, this.state.dateContext)
+    dateContext = moment(dateContext).subtract(1, 'month')
+    this.setState({ dateContext })
+    this.props.onPreviousMonth && this.props.onPreviousMonth()
+  }
+
   onSelectChange = (e, month) => {
     this.setMonth(month)
     this.props.onChangeMonth && this.props.onChangeMonth()
@@ -124,6 +138,10 @@ export default class Calendar extends React.Component {
     this.setState({ showMonthPopUp: !this.state.showMonthPopUp })
   }
 
+  onDayClick = (e, day) => {
+    this.props.onDayClick && this.props.onDayClick(e, day)
+  }
+
   render() {
     const weekdays = this.weekdaysShort.map(day => (
       <td key={day} className='week-day'>
@@ -145,7 +163,7 @@ export default class Calendar extends React.Component {
       let className = day === this.currentDate() ? 'day current-day' : 'day'
       datesInMonth.push(
         <td key={Math.random()} className={className}>
-          <span>{day}</span>
+          <span onClick={e => this.onDayClick(e, day)}>{day}</span>
         </td>
       )
     }
@@ -187,11 +205,11 @@ export default class Calendar extends React.Component {
                   onClick={e => {
                     this.previousMonth()
                   }}
-                />
+                />{' '}
                 <i
                   className='prev fas fa-chevron-right left'
                   onClick={e => {
-                    this.previousMonth()
+                    this.nextMonth()
                   }}
                 />
               </td>

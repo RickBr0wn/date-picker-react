@@ -22,6 +22,7 @@ tr {
 }
 
 .calendar-header {
+  position: relative;
   border-bottom: 1px dashed skyblue;
   font-size: 1.6em;
 }
@@ -82,9 +83,9 @@ tr {
 }
 
 .nav-month {
-  position: absolute;
-  top: 0.6em;
-  font-size: 0.6em;
+  position: relative;
+  top: 2px;
+  font-size: 0.5em;
   right: 3px;
 }
 
